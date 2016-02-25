@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TestChart</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_mpandroid_chart">MPAndroidChartActivity</string>
+    <string name="title_activity_hello_chart">HelloChartActivity</string>
+    <string name="title_activity_williams_chart">WilliamsChartActivity</string>
+    <string name="title_activity_android_plot">AndroidPlotActivity</string>
+</resources>
