@@ -42,4 +42,12 @@
         android:layout_below="@id/willButton"
         android:id="@+id/androidPlotButton"/>
 
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="AChartEngine"
+        android:onClick="onAChart"
+        android:layout_below="@id/androidPlotButton"
+        android:id="@+id/aChartButton"/>
+
 </RelativeLayout>

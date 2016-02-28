@@ -1,13 +1,9 @@
 package com.asraii.testchart;
 
-import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.androidplot.util.PixelUtils;
 import com.androidplot.xy.CatmullRomInterpolator;
@@ -16,7 +12,6 @@ import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
-import com.androidplot.xy.XYStepMode;
 
 import java.text.DecimalFormat;
 import java.text.FieldPosition;
@@ -52,10 +47,10 @@ public class AndroidPlotActivity extends AppCompatActivity {
     private void darwinexPlot() {
         // create a couple arrays of y-values to plot:
         ArrayList<Number> mLabels = new ArrayList<>();
-        Number[] mValues = new Number[DarwinexChart.portfolioChart.length];
-        for (int i = 0; i < DarwinexChart.portfolioChart.length; ++i) {
-            mLabels.add(DarwinexChart.portfolioChart[i][0]);
-            mValues[i] = DarwinexChart.portfolioChart[i][1];
+        Number[] mValues = new Number[Chart.values.length];
+        for (int i = 0; i < Chart.values.length; ++i) {
+            mLabels.add(Chart.values[i][0]);
+            mValues[i] = Chart.values[i][1];
         }
 
         // turn the above arrays into XYSeries':

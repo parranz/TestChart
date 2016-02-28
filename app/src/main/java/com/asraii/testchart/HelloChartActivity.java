@@ -1,18 +1,15 @@
 package com.asraii.testchart;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,7 +47,7 @@ public class HelloChartActivity extends ActionBarActivity {
         private boolean hasAxes = true;
         private boolean hasAxesNames = false;
         private boolean hasLines = true;
-        private boolean hasPoints = true;
+        private boolean hasPoints = false;
         private ValueShape shape = ValueShape.CIRCLE;
         private boolean isFilled = false;
         private boolean hasLabels = true;
@@ -77,19 +74,17 @@ public class HelloChartActivity extends ActionBarActivity {
 
         private void generateData() {
 
+            Chart chartValues = new Chart();
             List<Line> lines = new ArrayList<Line>();
             List<PointValue> values = new ArrayList<PointValue>();
             List<AxisValue> axisValues = new ArrayList<AxisValue>();
-            for (int i = 0; i < DarwinexChart.portfolioChart.length; ++i) {
-                PointValue point = new PointValue(i, DarwinexChart.portfolioChart[i][1]);
-                point.setLabel(new Date((long)DarwinexChart.portfolioChart[i][0]).toString());
+            for (int i = 0; i < Chart.values.length; ++i) {
+                PointValue point = new PointValue(i, Chart.values[i][1]);
+                point.setLabel(new Date((long) Chart.values[i][0]).toString());
                 values.add(point);
-//                AxisValue axisValue = new AxisValue(DarwinexChart.portfolioChart[i][0]);
-//                axisValue.setLabel(new Date((long)DarwinexChart.portfolioChart[i][0]).toString());
-//                axisValues.add(axisValue);
             }
             Line line = new Line(values);
-            line.setColor(ChartUtils.COLORS[1]);
+            line.setColor(Color.LTGRAY);
             line.setShape(shape);
             line.setCubic(isCubic);
             line.setFilled(isFilled);
@@ -98,32 +93,55 @@ public class HelloChartActivity extends ActionBarActivity {
             line.setHasLines(hasLines);
             line.setHasPoints(hasPoints);
             line.setFormatter(new SimpleLineChartValueFormatter(2));
+            line.setStrokeWidth(1);
+            line.setHasLabelsOnlyForSelected(true);
+            lines.add(line);
+
+            PointValue p = new PointValue(chartValues.getMinIndex(), chartValues.getMinValue());
+            values = new ArrayList<PointValue>();
+            values.add(p);
+            line = new Line(values);
+            line.setHasLabels(false);
+            line.setHasLabelsOnlyForSelected(true);
+            line.setHasLines(false);
+            line.setHasPoints(true);
+            line.setPointColor(Color.WHITE);
+            line.setFormatter(new SimpleLineChartValueFormatter(2));
+            line.setStrokeWidth(1);
+            line.setHasLabelsOnlyForSelected(true);
+            lines.add(line);
+
+            p = new PointValue(chartValues.getMaxIndex(), chartValues.getMaxValue());
+            values = new ArrayList<PointValue>();
+            values.add(p);
+            line = new Line(values);
+            line.setHasLabels(false);
+            line.setHasLabelsOnlyForSelected(true);
+            line.setHasLines(false);
+            line.setHasPoints(true);
+            line.setPointColor(Color.WHITE);
+            line.setFormatter(new SimpleLineChartValueFormatter(2));
+            line.setStrokeWidth(1);
             line.setHasLabelsOnlyForSelected(true);
             lines.add(line);
 
             data = new LineChartData(lines);
 
-            /*
-            if (hasAxes) {
-                Axis axisX = new Axis();
-                Axis axisY = new Axis().setHasLines(false);
-                if (hasAxesNames) {
-                    axisX.setName("Axis X");
-                    axisY.setName("Axis Y");
-                }
-                data.setAxisXBottom(axisX);
-                data.setAxisYLeft(axisY);
-            } else {
-                data.setAxisXBottom(null);
-                data.setAxisYLeft(null);
-            }*/
             data.setAxisXBottom(null);
             data.setAxisYLeft(null);
             data.setBaseValue(Float.NEGATIVE_INFINITY);
             data.setAxisXBottom(new Axis(axisValues));
             chart.setLineChartData(data);
+            chart.setBackgroundColor(Color.DKGRAY);
             chart.setZoomEnabled(true);
 
+            AlphaAnimation trans = new AlphaAnimation(0,100);
+            trans.setDuration(600);
+            trans.setInterpolator(new AccelerateInterpolator(1.0f));
+            chart.startAnimation(trans);
+            /*
+            chart.overridePendingTransition(R.anim.animation_enter,
+                    R.anim.animation_leave);*/
         }
 
 

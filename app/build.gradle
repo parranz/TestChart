@@ -21,6 +21,9 @@ android {
 
 repositories {
     maven { url "https://jitpack.io" }
+    maven {
+        url "https://repository-achartengine.forge.cloudbees.com/snapshot/"
+    }
 }
 
 dependencies {
@@ -33,4 +36,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'com.diogobernardino:williamchart:2.2'
     compile 'com.androidplot:androidplot-core:0.9.6'
+    compile group: 'org.achartengine', name: 'achartengine', version: '1.2.0'
 }

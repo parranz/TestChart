@@ -12,7 +12,8 @@
     <lecho.lib.hellocharts.view.LineChartView
         android:id="@+id/hellochart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="100dp"
+        android:layout_centerVertical="true">
     </lecho.lib.hellocharts.view.LineChartView>
 
 </RelativeLayout>

@@ -5,4 +5,5 @@
     <string name="title_activity_hello_chart">HelloChartActivity</string>
     <string name="title_activity_williams_chart">WilliamsChartActivity</string>
     <string name="title_activity_android_plot">AndroidPlotActivity</string>
+    <string name="title_activity_achart">AChartActivity</string>
 </resources>
